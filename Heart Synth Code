@@ -1,0 +1,102 @@
+//Defining variables
+int heartPin = 0;
+int ledPin = 13;
+int thresh = 0;
+int freq = 440;
+int oscillatorPin = 12;
+int counter = 0;
+int triggerTime = 0;
+int mappedThresh = 0;
+int led1 = 0;
+int led2 = 1;
+int led3 = 2;
+int led4 = 3;
+
+//Setup
+void setup() {
+  pinMode(heartPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(oscillatorPin, OUTPUT);
+  Serial.begin(9600);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+}
+
+//Begin the process
+void loop() {
+  int val = analogRead(0); //Read the pulse sensor
+  Serial.println(val); //Print heartPin (for troubleshooting) 
+  delay(50); //This delay prevents multiple reads from a single heartbeat.
+  thresh = analogRead(1); //Reading the threshold pot
+  mappedThresh = map(thresh, 4, 996, 300, 650); //Changed the range of thresh values to match heartPin
+//    Serial.println(mappedThresh);
+  if (val > thresh) { //When the heartbeat is greater than the threshold...
+    digitalWrite(ledPin, HIGH); //...light up the Teensy LED
+    counter++; //...trigger a movement in the counter/sequence. 
+
+    //RESET COUNTER
+    if (counter > 4) {
+      counter = 1;
+    }
+//    Serial.println(counter);
+
+    //SEQUENCER
+    //1
+    if (counter == 1) {
+    triggerTime = millis();
+    while(millis() < triggerTime + 14) { //Plays the note for a short period of time. 
+      playFrequency(55); //Could be any frequencey, I chose increasing octaves of A. 
+      digitalWrite(led1, HIGH);
+      
+    }
+    digitalWrite(led1, LOW);
+    delay(90); //Turn off the LED for a moment before continuing on. 
+    }
+
+    //2
+    if (counter == 2) {
+    triggerTime = millis();
+    while(millis() < triggerTime + 14) {
+      playFrequency(110);
+      digitalWrite(led2, HIGH);
+    }
+    digitalWrite(led2, LOW);
+    delay(90);
+    }
+    
+    //3
+    if (counter == 3) {
+    triggerTime = millis();
+    while(millis() < triggerTime + 14) {
+      playFrequency(220);
+      digitalWrite(led3, HIGH);
+    }
+    digitalWrite(led3, LOW);
+    delay(90);
+    }
+
+    //4
+    if (counter == 4) {
+    triggerTime = millis();
+    while(millis() < triggerTime + 14) {
+      playFrequency(440);
+      digitalWrite(led4, HIGH);
+    }
+    digitalWrite(led4, LOW);
+    delay(90);
+    }
+   
+  } else {
+    digitalWrite(ledPin, LOW); //If nothing happens, turn off LEDS and don't trigger frequencies. 
+  }
+}
+
+//PLAY FREQUENCY: Plays a note in a given frequency parameter. 
+void playFrequency(int freq) {
+  digitalWrite(oscillatorPin, HIGH);
+  delayMicroseconds(100000 / freq / 2);
+  digitalWrite(oscillatorPin, LOW);
+  delayMicroseconds(100000 / freq / 2);
+}
