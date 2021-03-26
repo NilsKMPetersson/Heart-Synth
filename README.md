@@ -7,6 +7,8 @@ I decided to create a synthesizer/sequencer that is triggered by the user’s he
 
 ![Link to picture](https://sites.google.com/a/nyu.edu/nils-digital-electronics/_/rsrc/1449787979437/home/final-project-blog/12348613_10153825337564216_852042241_n%20%281%29.jpg)
 
+Here is a short demo video of Heart-Synth in action:
+[![Heart-Synth Demo](https://www.youtube.com/watch?v=8kncr2PZEvg/0.jpg)](https://www.youtube.com/watch?v=8kncr2PZEvg)
 
 
 ## Project explanation/process journal: 
