@@ -12,6 +12,11 @@ I decided to create a synthesizer/sequencer that is triggered by the user’s he
 ![Link to picture](https://sites.google.com/a/nyu.edu/nils-digital-electronics/_/rsrc/1449787979437/home/final-project-blog/12348613_10153825337564216_852042241_n%20%281%29.jpg)
 
 
+
+![Link to picture](https://user-images.githubusercontent.com/43551833/112672972-8d9c2500-8e3a-11eb-89b1-0037e6d4fb78.png)
+
+
+
 ## Project explanation/process journal: 
 
 The heart monitor is a non-invasive optical pulse sensor that can accurately sense when blood pulses through the body, which is translated into voltage changes that are picked up by the Arduino microcontroller, which when plotted over time look like this: 
